@@ -6,11 +6,16 @@
   "enabledManagers": ["npm"],
   "ignoreDeps": ["np"],
   "labels": ["dependencies"],
+  "logLevel": "trace",
   "packageRules": [{
     "automerge": true,
     "packagePatterns": ["vl-ui*"],
     "updateTypes": ["minor", "patch"] 
   }],
+  "printConfig": true,
   "pruneStaleBranches": true,
-  "reviewers": ["coemans"]
+  "reviewers": ["coemans"],
+  "repositories": [
+    "https://repository.milieuinfo.be/artifactory/api/npm/acd-npm/"
+  ]
 }
