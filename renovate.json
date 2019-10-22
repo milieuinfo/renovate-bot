@@ -16,6 +16,6 @@
   "pruneStaleBranches": true,
   "reviewers": ["coemans"],
   "repositories": [
-    "https://repository.milieuinfo.be/artifactory/api/npm/acd-npm/"
+    "http://repository.milieuinfo.be/artifactory/api/npm/acd-npm/"
   ]
 }
