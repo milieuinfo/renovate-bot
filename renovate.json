@@ -1,0 +1,16 @@
+{
+  "autodiscover": true,
+  "autodiscoverFilter": "milieuinfo/webcomponent-vl-ui-*",
+  "assignees": ["coemans"],
+  "enabled": true,
+  "enabledManagers": ["npm"],
+  "ignoreDeps": ["np"],
+  "labels": ["dependencies"],
+  "packageRules": [{
+    "automerge": true,
+    "packagePatterns": ["vl-ui*"],
+    "updateTypes": ["minor", "patch"] 
+  }],
+  "pruneStaleBranches": true,
+  "reviewers": ["coemans"]
+}
