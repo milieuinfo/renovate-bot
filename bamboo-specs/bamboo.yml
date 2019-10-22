@@ -1,15 +1,24 @@
-project:
-  key: WEBCO
-  plan:
-    name: renovate-bot
-    key: REN
+---
+version: 2
+plan:
+  project-key: WEBCO
+  key: REN
+  name: renovate-bot
+
 stages:
-  - jobs:
-      - script: |
+  - Build:
+      jobs:
+        - Build
+
+Build:
+  key: BD
+  tasks:
+    - clean
+    - script: |
           #!/usr/env/bin bash
           set -e
           cp ${bamboo.npmrc_path} . 
-          'docker run --volume ${PWD}/renovate.json:/usr/src/app/renovate.json --volume ${PWD}/.npmrc:/usr/src/app/.npmrc -e RENOVATE_TOKEN=BAMSCRT@0@0@2sxRkvVzxYftc0x99Xpzh9Hn6BiTsbozp4UgPruwXUBqWhEQawWo2vtac3zphHWV -e RENOVATE_CONFIG_FILE=/usr/src/app/renovate.json -e HTTP_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 -e HTTPS_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 acd-docker.repository.milieuinfo.be/renovate/renovate'
+          docker run --volume ${PWD}/renovate.json:/usr/src/app/renovate.json --volume ${PWD}/.npmrc:/usr/src/app/.npmrc -e RENOVATE_TOKEN=${bamboo.github_secret_access_token} -e RENOVATE_CONFIG_FILE=/usr/src/app/renovate.json -e HTTP_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 -e HTTPS_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 acd-docker.repository.milieuinfo.be/renovate/renovate
           /opt/scripts/docker/stop-docker-containers.sh
-        requirements:
-          - REMOTE_ONLY
+  requirements:
+    - REMOTE_ONLY
