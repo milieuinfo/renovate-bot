@@ -11,9 +11,6 @@
     "packagePatterns": ["vl-ui*"],
     "updateTypes": ["minor", "patch"] 
   }],
-  "publishConfig": {
-    "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
-  },
   "pruneStaleBranches": true,
   "reviewers": ["coemans"]
 }
