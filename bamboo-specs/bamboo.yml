@@ -18,6 +18,8 @@ Build:
           #!/usr/env/bin bash
           set -e
           cp ${bamboo.npmrc_path} .
-          docker run --volume ${PWD}/renovate.json:/usr/src/app/renovate.json --volume ${PWD}/.npmrc:/usr/src/app/.npmrc -e RENOVATE_TOKEN=${bamboo.github_secret_access_token} -e RENOVATE_CONFIG_FILE=/usr/src/app/renovate.json -e HTTP_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 -e HTTPS_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 acd-docker.repository.milieuinfo.be/renovate/renovate
+          NPMRC=$(cat .npmrc)
+          REPO=$(echo $NPMRC | cut -d' ' -f2)
+          docker run --volume ${PWD}/renovate.json:/usr/src/app/renovate.json --volume ${PWD}/.npmrc:/usr/src/app/.npmrc -e RENOVATE_TOKEN=${bamboo.github_secret_access_token} -e RENOVATE_NPMRC=${REPO} -e RENOVATE_CONFIG_FILE=/usr/src/app/renovate.json -e HTTP_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 -e HTTPS_PROXY=http://forwardproxy-pr-build.lb.cumuli.be:3128 acd-docker.repository.milieuinfo.be/renovate/renovate
   requirements:
     - REMOTE_ONLY
